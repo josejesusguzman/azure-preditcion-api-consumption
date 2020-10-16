@@ -1,7 +1,7 @@
 # Tutorial de consumo de la Azure Prediction API con javascript
 Producción II
 
-Esn este tutorial aprenderás como conectar un formulario HTML con la API y el servicio que creaste en Custom Vision.
+En este tutorial aprenderás como conectar un formulario HTML con la API y el servicio que creaste en Custom Vision.
 
  - **[Ve el video tutorial aquí](https://web.microsoftstream.com/video/f4efda53-49b4-4fcb-a10b-6dfc3b673a62)**
 
