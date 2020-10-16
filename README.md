@@ -1,0 +1,1 @@
+# azure-preditcion-api-consumption

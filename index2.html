@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta etiquetas para darle información al navegador sobre nuestra página -->
+    <!-- Codificación de la página -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Aquí agregamos un archivo CSS para cambiar el diseño de nuestra página -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Así se pone el titulo de la página que te aparece en la pestaña -->
+    <title>Ejercicio del miércoles</title>
+</head>
+<!-- El en body se pone todo lo que se mostrará en la página -->
+<body>
+    <!-- Titulo o encabezado de la página visible al usuario -->
+    <h1 id="titulo" class="titulo-class">EJERCICIO DEL MIÉRCOLES</h1>
+    <!-- Así pones un parrafo para dar instrucciones a usuario -->
+    <p id="instrucciones" style="border: 2px solid blue;">
+        Ingresa la URL de una imagen de gatitos
+    </p>
+
+    <!-- Aquí construyes el formulario -->
+    <form id="MyForm">
+        <!-- Espacio de texto para la URL -->
+        <input id="url" type="url" placeholder="URL de la imagen">
+        <!-- Botón para mandar la INFO -->
+        <button type="button" onclick="sendToAzure2()">Enviar</button>
+    </form>
+
+    <!-- Aquí va a caer el resultado de la API -->
+    <p id="result_space"></p>
+
+</body>
+</html>
+
+<!-- Es necesaria esta linea para usar jquery que lo usaremos para llamar a nuestra API -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script>
+    //AQUÑI VA TU CÓDIGO JAVASCRIPT
+</script>
