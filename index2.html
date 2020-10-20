@@ -1,29 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Meta etiquetas para darle información al navegador sobre nuestra página -->
-    <!-- Codificación de la página -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Aquí agregamos un archivo CSS para cambiar el diseño de nuestra página -->
     <link rel="stylesheet" href="style.css">
-    <!-- Así se pone el titulo de la página que te aparece en la pestaña -->
     <title>Ejercicio del miércoles</title>
 </head>
-<!-- El en body se pone todo lo que se mostrará en la página -->
 <body>
-    <!-- Titulo o encabezado de la página visible al usuario -->
     <h1 id="titulo" class="titulo-class">EJERCICIO DEL MIÉRCOLES</h1>
-    <!-- Así pones un parrafo para dar instrucciones a usuario -->
     <p id="instrucciones" style="border: 2px solid blue;">
         Ingresa la URL de una imagen de gatitos
     </p>
 
-    <!-- Aquí construyes el formulario -->
+    <p>https://estaticos.muyinteresante.es/uploads/images/gallery/59c4f5655bafe82c692a7052/gato-marron-redes.jpg</p>
+
     <form id="MyForm">
-        <!-- Espacio de texto para la URL -->
         <input id="url" type="url" placeholder="URL de la imagen">
-        <!-- Botón para mandar la INFO -->
         <button type="button" onclick="sendToAzure2()">Enviar</button>
     </form>
 
@@ -33,8 +25,64 @@
 </body>
 </html>
 
-<!-- Es necesaria esta linea para usar jquery que lo usaremos para llamar a nuestra API -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script>
-    //AQUÑI VA TU CÓDIGO JAVASCRIPT
+
+    function sendToAzure2() {
+        const url = document.getElementById("url").value;
+        console.log(url);
+        $.ajax({
+            url: "URL_DE_CUSTOM_VISION",
+            beforeSend: function(xhrObj){
+                // Request headers
+                xhrObj.setRequestHeader("Content-Type","application/json");
+                xhrObj.setRequestHeader("Prediction-key","PREDICTION_KEY");
+            },
+            type: "POST",
+            // Request body
+            data: '{"Url":"' + url + '"}',
+        })
+        .done(function(data) {
+            var majorElement = "";
+            var majorPrediction = 0;
+            data.predictions.forEach(element => {
+                if (majorPrediction < element.probability) {
+                    majorPrediction = element.probability
+                    majorElement = element.tagName
+                }
+                    
+            });
+
+            const prediction = round(majorPrediction * 100)
+            console.log(majorPrediction)
+
+            switch(majorElement) {
+                case "gatos":
+                    document.getElementById("result_space").innerHTML = "La foto es de un gato con una probabilidad de " + prediction + " %"
+                    break
+                case "perros":
+                    document.getElementById("result_space").innerHTML = "La foto es de un perro con una probabilidad de " + prediction + "%"
+                    break
+                default:
+                    document.getElementById("result_space").innerHTML = "No se que sea"
+            }
+        })
+        .fail(function() {
+            alert("error");
+        });
+    }
+
+    function round(num, decimales = 2) {
+        var signo = (num >= 0 ? 1 : -1);
+        num = num * signo;
+        if (decimales === 0) //con 0 decimales
+            return signo * Math.round(num);
+        // round(x * 10 ^ decimales)
+        num = num.toString().split('e');
+        num = Math.round(+(num[0] + 'e' + (num[1] ? (+num[1] + decimales) : decimales)));
+        // x * 10 ^ (-decimales)
+        num = num.toString().split('e');
+        return signo * (num[0] + 'e' + (num[1] ? (+num[1] - decimales) : -decimales));
+    }
+
 </script>
