@@ -16,7 +16,7 @@
 
     <form id="MyForm">
         <input id="url" type="url" placeholder="URL de la imagen">
-        <button type="button" onclick="sendToAzure2()">Enviar</button>
+        <button type="button" onclick="sendToAzure()">Enviar</button>
     </form>
 
     <!-- Aquí va a caer el resultado de la API -->
@@ -25,24 +25,36 @@
 </body>
 </html>
 
+<!-- Agregar las librerías necesarias para enviar los daros --> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script>
 
-    function sendToAzure2() {
+    // Función que envía al servicio de Custom Vision
+    function sendToAzure() {
+        //Obtener la URL del campo de texto
         const url = document.getElementById("url").value;
+        // Imprimir en console la url obtenida para corroborar que se obtuvo
         console.log(url);
+        // Se inicia la función en segundo plano para enviar la data
         $.ajax({
+            // Aquí pones la URL que te da Custom Vision
             url: "URL_DE_CUSTOM_VISION",
+            // Aquí mandamos los headers necesarios 
             beforeSend: function(xhrObj){
-                // Request headers
+                // Headers
                 xhrObj.setRequestHeader("Content-Type","application/json");
+                //Aquí pones el Prediction-Key que te da Custom Vision
                 xhrObj.setRequestHeader("Prediction-key","PREDICTION_KEY");
             },
+            // Esta petición se manda por POST ya que lo pide la API y se debe mandar así
+            // Por cuestiones de seguridad
             type: "POST",
             // Request body
             data: '{"Url":"' + url + '"}',
         })
+        // Si todo sale bein entra aquí
         .done(function(data) {
+            // Este algortimo obtiene la predicción mayor de todos los tags
             var majorElement = "";
             var majorPrediction = 0;
             data.predictions.forEach(element => {
@@ -50,12 +62,12 @@
                     majorPrediction = element.probability
                     majorElement = element.tagName
                 }
-                    
             });
 
+            // Redondear la predicción resultante
             const prediction = round(majorPrediction * 100)
-            console.log(majorPrediction)
 
+            // Aquí se decide si es perro o gato la mayor predicción
             switch(majorElement) {
                 case "gatos":
                     document.getElementById("result_space").innerHTML = "La foto es de un gato con una probabilidad de " + prediction + " %"
@@ -67,11 +79,13 @@
                     document.getElementById("result_space").innerHTML = "No se que sea"
             }
         })
+        // Si la petición a la API de producción no funciona cae aquí
         .fail(function() {
             alert("error");
         });
     }
 
+    // Función para redondear el número birndado
     function round(num, decimales = 2) {
         var signo = (num >= 0 ? 1 : -1);
         num = num * signo;
