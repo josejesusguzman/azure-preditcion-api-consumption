@@ -5,9 +5,13 @@ En este tutorial aprenderás como conectar un formulario HTML con la API y el se
 
  - **[Ve clase de Innovacción aquí](https://web.microsoftstream.com/video/b32f065b-858d-459a-baf1-61a8c17654fe)**
 
-En el archivo **index2.html** tienes el formulario que use para está práctica
+En el archivo **[formulario.html](/formulario.html)** tienes el formulario que use para está práctica
 
-En el archivo **style.css** puedes modificar el tipo de letra, el color de letra, el tamaño, etc. Explota tu creatividad
+En el archivo **[style.css](/style.css)** puedes modificar el tipo de letra, el color de letra, el tamaño, etc. Explota tu creatividad.
+
+En el archivo **[script.js](/script.js)** esta la logica y el código que hace la petición al servicio de Custom Vision
+
+En el archivo **[index.php](/index.php)** se encuentra lo que leerá App Service y lo que ejecutará.
 
 Es importante que reemplaces la URL de consumo y la **Prediction-Key** por la que te da el servicio de **[Custom Vision](https://www.customvision.ai/)** 
 

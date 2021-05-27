@@ -21,7 +21,7 @@ function sendToAzure() {
         // Request body
         data: '{"Url":"' + url + '"}',
     })
-    // Si todo sale bein entra aquí
+    // Si todo sale bien entra aquí
     .done(function(data) {
         // Este algortimo obtiene la predicción mayor de todos los tags
         var majorElement = "";
@@ -37,6 +37,7 @@ function sendToAzure() {
         const prediction = round(majorPrediction * 100)
 
         // Aquí se decide si es perro o gato la mayor predicción
+        //Cambia cada CASE por el TAg que hayas puesto
         switch(majorElement) {
             case "gatos":
                 document.getElementById("result_space").innerHTML = "La foto es de un gato con una probabilidad de " + prediction + " %"
@@ -54,7 +55,7 @@ function sendToAzure() {
     });
 }
 
-// Función para redondear el número birndado
+// Función para redondear el número brindado
 function round(num, decimales = 2) {
     var signo = (num >= 0 ? 1 : -1);
     num = num * signo;
