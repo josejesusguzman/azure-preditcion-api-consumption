@@ -13,5 +13,3 @@ En el archivo **[script.js](/script.js)** esta la logica y el código que hace l
 En el archivo **[index.php](/index.php)** se encuentra lo que leerá App Service y lo que ejecutará.
 
 Es importante que reemplaces la URL de consumo y la **Prediction-Key** por la que te da el servicio de **[Custom Vision](https://www.customvision.ai/)** 
-
-NOTA: No está puclicado el código de javascript ya que estaría regalando el reto master de Producción II.
