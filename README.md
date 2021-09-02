@@ -2,7 +2,7 @@
 
 En este tutorial aprenderás como conectar un formulario HTML con la API y el servicio que creaste en Custom Vision.
 
- - **[Ve clase de Innovacción aquí](https://web.microsoftstream.com/video/f66412fb-b9f0-421e-8d56-809aebb25b35)**
+ - **[Ve clase de Innovacción aquí](https://web.microsoftstream.com/video/451b5ae7-2555-44b9-b848-d2d17f6a3a05)**
 
 En el archivo **[formulario.html](/formulario.html)** tienes el formulario que use para está práctica
 
